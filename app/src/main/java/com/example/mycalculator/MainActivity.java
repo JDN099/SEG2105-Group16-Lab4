@@ -21,15 +21,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean clearText = false;
     private String lastResult = null;
 
-    // This is to evaluate the math expression
-    ScriptEngine engine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        engine = new ScriptEngineManager().getEngineByName("rhino");
 
         btn0 = findViewById(R.id.btn0);
         btn1 = findViewById(R.id.btn1);
@@ -129,15 +125,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_equal:
-                String result = null;
                 clearText = true;
-                try {
-                    result = evaluate(text_display.getText().toString());
-                    text_display.setText(result);
-                    lastResult = result;
-                } catch (Exception e) {
-                    text_display.setText("Error");
+                String expr = text_display.getText().toString();
+                String result = MathEval.eval(expr);
+                text_display.setText(result);
+
+                if ("Error".equals(result)) {
                     lastResult = null;
+                } else {
+                    lastResult = result;
                 }
                 break;
 
@@ -146,12 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 clear_display();
                 break;
         }
-    }
-
-    private String evaluate(String expression) throws Exception {
-        String result = engine.eval(expression).toString();
-        BigDecimal decimal = new BigDecimal(result);
-        return decimal.setScale(8, BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toPlainString();
     }
 
     private void addNumber(String number) {
