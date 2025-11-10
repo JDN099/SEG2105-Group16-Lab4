@@ -18,8 +18,8 @@ import javax.script.ScriptEngineManager;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn_plus, btn_minus, btn_mult, btn_division, btn_dot, btn_clear, btn_equal;
     TextView text_display;
-    private boolean clearText = false;
-    private String lastResult = null;
+    private static boolean clearText = false;
+    private static String lastResult = null;
 
 
     @Override
@@ -73,50 +73,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn0)
-            addNumber("0");
+            text_display.setText(addNumber("0", text_display.getText().toString()));
         if (v.getId() == R.id.btn1)
-            addNumber("1");
+            text_display.setText(addNumber("1", text_display.getText().toString()));
         if (v.getId() == R.id.btn2)
-            addNumber("2");
+            text_display.setText(addNumber("2", text_display.getText().toString()));
         if (v.getId() == R.id.btn3)
-            addNumber("3");
+            text_display.setText(addNumber("3", text_display.getText().toString()));
         if (v.getId() == R.id.btn4)
-            addNumber("4");
+            text_display.setText(addNumber("4", text_display.getText().toString()));
 
         if (v.getId() == R.id.btn5)
-            addNumber("5");
+            text_display.setText(addNumber("5", text_display.getText().toString()));
 
         if (v.getId() == R.id.btn6)
-            addNumber("6");
+            text_display.setText(addNumber("6", text_display.getText().toString()));
 
         if (v.getId() == R.id.btn7)
-            addNumber("7");
+            text_display.setText(addNumber("7", text_display.getText().toString()));
 
         if (v.getId() == R.id.btn8)
-            addNumber("8");
+            text_display.setText(addNumber("8", text_display.getText().toString()));
 
         if (v.getId() == R.id.btn9)
-            addNumber("9");
+            text_display.setText(addNumber("9", text_display.getText().toString()));
 
         if (v.getId() == R.id.btn_dot)
-            addNumber(".");
+            text_display.setText(addNumber(".", text_display.getText().toString()));
 
 
 
         if (v.getId() == R.id.btn_minus)
-            addNumber("-");
+            text_display.setText(addNumber("-", text_display.getText().toString()));
 
 
         if (v.getId() == R.id.btn_mult)
-            addNumber("*");
+            text_display.setText(addNumber("*", text_display.getText().toString()));
 
 
         if (v.getId() == R.id.btn_division)
-            addNumber("/");
+            text_display.setText(addNumber("/", text_display.getText().toString()));
 
 
         if (v.getId() == R.id.btn_plus)
-            addNumber("+");
+            text_display.setText(addNumber("+", text_display.getText().toString()));
 
 
         if (v.getId() == R.id.btn_equal) {
@@ -134,25 +134,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v.getId() == R.id.btn_clear) {
             lastResult = null;
-            clear_display();
+            text_display.setText(clear_display());
         }
     }
 
-    private void addNumber(String number) {
+    public static String addNumber(String number, String context) {
         if (clearText) {
-            clear_display();
+            context = clear_display();
             clearText = false;
         }
         if (lastResult != null && "+-*/".contains(number)) {
-            text_display.setText(lastResult);
+            String t = lastResult;
             lastResult = null;
+            return (t);
         } else {
             lastResult = null;
         }
-        text_display.setText(text_display.getText() + number);
+        return (context + number);
+        
     }
 
-    private void clear_display() {
-        text_display.setText("");
+    private static String clear_display() {
+        return "";
     }
 }
