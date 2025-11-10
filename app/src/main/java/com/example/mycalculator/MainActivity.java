@@ -72,75 +72,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn0:
-                addNumber("0");
-                break;
-            case R.id.btn1:
-                addNumber("1");
-                break;
-            case R.id.btn2:
-                addNumber("2");
-                break;
-            case R.id.btn3:
-                addNumber("3");
-                break;
-            case R.id.btn4:
-                addNumber("4");
-                break;
-            case R.id.btn5:
-                addNumber("5");
-                break;
-            case R.id.btn6:
-                addNumber("6");
-                break;
-            case R.id.btn7:
-                addNumber("7");
-                break;
-            case R.id.btn8:
-                addNumber("8");
-                break;
-            case R.id.btn9:
-                addNumber("9");
-                break;
-            case R.id.btn_dot:
-                addNumber(".");
-                break;
+        if (v.getId() == R.id.btn0)
+            addNumber("0");
+        if (v.getId() == R.id.btn1)
+            addNumber("1");
+        if (v.getId() == R.id.btn2)
+            addNumber("2");
+        if (v.getId() == R.id.btn3)
+            addNumber("3");
+        if (v.getId() == R.id.btn4)
+            addNumber("4");
+
+        if (v.getId() == R.id.btn5)
+            addNumber("5");
+
+        if (v.getId() == R.id.btn6)
+            addNumber("6");
+
+        if (v.getId() == R.id.btn7)
+            addNumber("7");
+
+        if (v.getId() == R.id.btn8)
+            addNumber("8");
+
+        if (v.getId() == R.id.btn9)
+            addNumber("9");
+
+        if (v.getId() == R.id.btn_dot)
+            addNumber(".");
 
 
-            case R.id.btn_minus:
-                addNumber("-");
-                break;
 
-            case R.id.btn_mult:
-                addNumber("*");
-                break;
+        if (v.getId() == R.id.btn_minus)
+            addNumber("-");
 
-            case R.id.btn_division:
-                addNumber("/");
-                break;
 
-            case R.id.btn_plus:
-                addNumber("+");
-                break;
+        if (v.getId() == R.id.btn_mult)
+            addNumber("*");
 
-            case R.id.btn_equal:
-                clearText = true;
-                String expr = text_display.getText().toString();
-                String result = MathEval.eval(expr);
-                text_display.setText(result);
 
-                if ("Error".equals(result)) {
-                    lastResult = null;
-                } else {
-                    lastResult = result;
-                }
-                break;
+        if (v.getId() == R.id.btn_division)
+            addNumber("/");
 
-            case R.id.btn_clear:
+
+        if (v.getId() == R.id.btn_plus)
+            addNumber("+");
+
+
+        if (v.getId() == R.id.btn_equal) {
+            clearText = true;
+            String expr = text_display.getText().toString();
+            String result = MathEval.eval(expr);
+            text_display.setText(result);
+
+            if ("Error".equals(result)) {
                 lastResult = null;
-                clear_display();
-                break;
+            } else {
+                lastResult = result;
+            }
+
+        }
+        if (v.getId() == R.id.btn_clear) {
+            lastResult = null;
+            clear_display();
         }
     }
 
